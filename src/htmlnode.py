@@ -13,7 +13,7 @@ class HTMLNode:
             return ""
         props = ""
         for key, value in self.props.items():
-            props += f' {key}={value}'
+            props += f' {key}="{value}"'
         return props
     
     def __repr__(self):
@@ -24,9 +24,9 @@ class LeafNode(HTMLNode):
         super().__init__(tag, value, None, props)
     
     def to_html(self):
-        if self.value == None:
+        if self.value is None:
             raise ValueError("Invalid HTML: no value")
-        if self.tag == None:
+        if self.tag is None:
             return self.value
         return f"<{self.tag}{self.props_to_html()}>{self.value}</{self.tag}>"
     
